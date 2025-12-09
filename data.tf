@@ -7,7 +7,7 @@ output "availability_zones_info"{
     value = data.aws_availability_zones.available # ll get all the details of availability from data top code...
 }
 
-# here i am ssking the  default vpc id data
+# here i am asking the  default vpc id data
 data "aws_vpc" "default" {
   default = true
 }

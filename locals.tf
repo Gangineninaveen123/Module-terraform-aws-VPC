@@ -5,5 +5,6 @@ locals {
         Terraform = "true"
     }
 
-    availability_zones = slice(data.aws_availability_zones.available.names, 0, 2)
+# check slice functionality in goodle
+    availability_zones = slice(data.aws_availability_zones.available.names, 0, 2) # (0,2) means, it ll take, 0th and 1st index, and dont take 2nd index.....
 }

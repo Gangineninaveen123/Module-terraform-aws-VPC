@@ -206,7 +206,7 @@ resource "aws_route" "database" {
 # route table association with subnets -> we are keeping route tables in subnets.
 #public route table assiciation with public subnet 
 resource "aws_route_table_association" "public" {
-  count = length(var.public_subnet_cidr) # i need to associate 2 times, beacuse
+  count = length(var.public_subnet_cidr) # i need to associate 2 times, beacuse 2 ubnet id's.
   subnet_id      = aws_subnet.public[count.index].id  # here first, there are 2 subnet ids , which these 2 subnet ids were in whole one public subnet table we can consider,
   route_table_id = aws_route_table.public.id # so here, the subnet id's , as per count value, wether its 0 or 1, it ll associate or ll connect with public route table.
 }
