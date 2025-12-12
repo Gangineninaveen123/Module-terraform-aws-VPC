@@ -7,3 +7,13 @@ output "vpc_id" {
 output "public_subnet_ids" {
     value = aws_subnet.public[*].id # here i am getting 2 subnets, thats y i am using *.id here..
 }
+
+#this comes from the module, check in main.tf, then go to that module, more more info, check mainly main.tf then other files in that module...
+output "private_subnet_ids" {
+    value = aws_subnet.private[*].id # here i am getting 2 subnets, thats y i am using *.id here..
+}
+
+#this comes from the module, check in main.tf, then go to that module, more more info, check mainly main.tf then other files in that module...
+output "database_subnet_ids" {
+    value = aws_subnet.database[*].id # here i am getting 2 subnets, thats y i am using *.id here..
+}
