@@ -37,7 +37,7 @@ resource "aws_vpc_peering_connection" "default" {
   
 resource "aws_route" "public_peering" {
   count = var.is_peering_required ? 1 : 0  #here 1 means peering requires, 0 means false not required.
-  route_table_id            = aws_route_table.public.id #adding route to route table
+  route_table_id            = aws_route_table.public.id #adding route to route table [roboshop -dev -> vpc public route table]
   destination_cidr_block    = data.aws_vpc.default.cidr_block # creating route from roboshop-dev vpc, route table to default  vpc, public route table in it, which is in the subnet of default vpc.
   vpc_peering_connection_id = aws_vpc_peering_connection.default[count.index].id # we are accessing vpc peering connection once , only, but we have defined count as list, so we are using count.index 
   
@@ -71,7 +71,7 @@ resource "aws_route" "database_peering" {
   # database route table peering between, roboshop-dev to default vpc
 resource "aws_route" "default_peering" {
   count = var.is_peering_required ? 1 : 0  #here 1 means peering requires, 0 means false not required.
-  route_table_id            = data.aws_route_table.main.id #adding route to route table
+  route_table_id            = data.aws_route_table.main.id # [default vpc id ] check in data source for more details, adding route to route table
   destination_cidr_block    = var.cidr_block # creating route from default vpc, route table to roboshop-dev  vpc, public/main route table in it, which is in the subnet of roboshop-dev vpc.
   vpc_peering_connection_id = aws_vpc_peering_connection.default[count.index].id # we are accessing vpc peering connection once , only, but we have defined count as list, so we are using count.index 
   

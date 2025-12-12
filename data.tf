@@ -19,7 +19,7 @@ output "default_vpc_id" {
 # AS SAME, how we have done VPC PEERING IN roboshop-dev vpc[ the default vpc cidr details ], same like that, WE NEED TO ADD OR VPC PEERING in default vpc[Need to add the roboshop-dev cidr details in main route table of default vpc]
 # same we need use data source
 data "aws_route_table" "main" {
-  vpc_id = data.aws_vpc.default.id 
+  vpc_id = data.aws_vpc.default.id  #defaukt vpc id , i ll get here......
   filter {
     name = "association.main" # Every VPC must have one main route table, Terraform filter finds that one route table, No matter how many route tables exist, only one returns true, so the fileter here means - “Select the route table that is automatically used by the VPC when no custom route table is assigned.”
     values = ["true"]

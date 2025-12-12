@@ -125,7 +125,7 @@ resource "aws_eip" "nat" {
 # Creating NAT Gate way
 resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat.id # this elastic ip comes from above, and ll attach to NAT Gateway
-  subnet_id     = aws_subnet.public[0].id # here in public subnets, 2 subnets ll create, dut to subnet_cidr , so in 1st subnet, we are keeping out Created NAT Gateway.
+  subnet_id     = aws_subnet.public[0].id # here in public subnets, 2 subnets ll create, due to subnet_cidr , so in 1st subnet, we are keeping our Created NAT Gateway.
 
   tags = merge(
     var.nat_gateway_tags,
@@ -137,7 +137,7 @@ resource "aws_nat_gateway" "main" {
 
   # To ensure proper ordering, it is recommended to add an explicit dependency
   # on the Internet Gateway for the VPC.
-  depends_on = [aws_internet_gateway.main] # here, some times terraform ll not know, few dependencies, best one is NAT Gateway, connecting to Internet Gateway, and, then it connects to Internet, so this type situatuation, tyerraform don't know, so this type , we ll give dependency, by our own...
+  depends_on = [aws_internet_gateway.main] # here, some times terraform ll not know, few dependencies, best one is NAT Gateway, connecting to Internet Gateway, and, then it connects to Internet, so this type situatuation, terraform don't know, so this type , we ll give dependency, by our own...
 }
 
 # Public route table
@@ -206,7 +206,7 @@ resource "aws_route" "database" {
 # route table association with subnets -> we are keeping route tables in subnets.
 #public route table assiciation with public subnet 
 resource "aws_route_table_association" "public" {
-  count = length(var.public_subnet_cidr) # i need to associate 2 times, beacuse 2 ubnet id's.
+  count = length(var.public_subnet_cidr) # i need to associate 2 times, beacuse 2 subnet id's.
   subnet_id      = aws_subnet.public[count.index].id  # here first, there are 2 subnet ids , which these 2 subnet ids were in whole one public subnet table we can consider,
   route_table_id = aws_route_table.public.id # so here, the subnet id's , as per count value, wether its 0 or 1, it ll associate or ll connect with public route table.
 }
